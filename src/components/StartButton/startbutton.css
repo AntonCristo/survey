@@ -1,0 +1,16 @@
+.StartButton{
+    cursor: pointer;
+    color: #fff;
+    font-size: 2em;
+    padding: 20px 15px;
+    font-weight: bold;
+    background-color: #011640;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+}
+
+.StartButton:hover{
+    background-color: #e1e1e1;
+    color: #011640;
+}
