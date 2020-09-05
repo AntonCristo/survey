@@ -4,10 +4,10 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-image: url('./assets/dashboard.jpg');
+  background-color: #e1e1e1;
   background-repeat: no-repeat;
   background-size: cover;
-  color: #e1e1e1;
+  
   overflow: auto;
   
 }
@@ -15,4 +15,5 @@
 h1{
   text-shadow: 2px 2px 3px #000;
   margin: 40px;
+  color: #272643;
 }
