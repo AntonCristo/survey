@@ -83,7 +83,9 @@ const Survey = props => {
     );
 
     if(finished){
-        surveyStatus = <h1>FINISHED!!!!!!!!!!!!!!!!!!!</h1>
+        surveyStatus = (<h1 style={{border:'1px solid #e1e1e1',backgroundColor:'#fff',padding:'15px 20px',borderRadius:'10px'}} >
+            FINISHED THE SURVEY, THANKS!
+        </h1>)
     }
 
     useEffect(()=>{
