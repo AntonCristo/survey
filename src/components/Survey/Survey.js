@@ -48,11 +48,17 @@ const Survey = props => {
     const fetchQuestionsOnLoad = () => {
         Axios.get('https://antoncristo-35c8e.firebaseio.com/questions.json')
         .then(res => {
+
             let temparr = [];
+            let question = {};
             for(let q in res.data){
                 
-                //console.log(res.data[q]);
-                temparr.push(res.data[q])
+                question = {
+                    question: res.data[q].question,
+                    answers: res.data[q].answers
+                }
+                
+                temparr.push(question);
             }
 
             setQuestions(temparr);

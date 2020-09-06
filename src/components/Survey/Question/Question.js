@@ -1,6 +1,8 @@
 import React,{ useState,useRef, useEffect } from 'react';
 import './question.css';
 import wrong from '../../../assets/error.svg';
+import Axios from 'axios';
+
 const Question = props => {
 
     //props.correctAnswerHandler function to play next question needs 
@@ -25,18 +27,24 @@ const Question = props => {
     }
 
     const checkCorrectAnswer = () => {
-        if(checkedAnswer===props.question.correct){
-            setQuestionPassed(true);
-            setTimeout(()=>{props.correctAnswerHandler()},2000);
-        }
-        else{
-            setQuestionPassed(false);
-            setWrongAnswerClicked(<img alt="wrong" src={wrong} />);
-            setTimeout(()=>{
-                setWrongAnswerClicked(null);
-            },1000);
-            
-        }
+        Axios.get(`https://antoncristo-35c8e.firebaseio.com/questions/q${props.index+1}/correct.json`)
+        .then(res => {
+
+            if(checkedAnswer===res.data){
+                setQuestionPassed(true);
+                setTimeout(()=>{props.correctAnswerHandler()},2000);
+            }
+            else{
+                setQuestionPassed(false);
+                setWrongAnswerClicked(<img alt="wrong" src={wrong} />);
+                setTimeout(()=>{
+                    setWrongAnswerClicked(null);
+                },1000);
+                
+            }
+        })
+        .catch(err => console.log(err.message));
+
     }
 
     const { index } = props;
