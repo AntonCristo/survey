@@ -13,6 +13,7 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
+    "deploy": "aws s3 sync build/ s3://survey-first",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

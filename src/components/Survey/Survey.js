@@ -1,7 +1,8 @@
-import React,{ useState,useEffect, useCallback } from 'react';
+import React,{ useState,useEffect } from 'react';
 import './survey.css';
 import Question from './Question/Question';
 import Axios from 'axios';
+import done from '../../assets/done.svg';
 
 // const Q1 = {
 //     question: 'Is it possible to be friends with a Sheep?',
@@ -44,7 +45,7 @@ const Survey = props => {
     const [finished,setFinished] = useState(false);
     const [questions,setQuestions] = useState([]);
 
-    const fetchQuestionsOnLoad = useCallback(() => {
+    const fetchQuestionsOnLoad = () => {
         Axios.get('https://antoncristo-35c8e.firebaseio.com/questions.json')
         .then(res => {
             let temparr = [];
@@ -55,12 +56,11 @@ const Survey = props => {
             }
 
             setQuestions(temparr);
-            console.log(questions);
         })
         .catch(err => {
             console.log(err.message);
         })
-    },[questions]);
+    }
     
 
     const nextQuestion = () => {
@@ -83,15 +83,22 @@ const Survey = props => {
     );
 
     if(finished){
-        surveyStatus = (<h1 style={{border:'1px solid #e1e1e1',backgroundColor:'#fff',padding:'15px 20px',borderRadius:'10px'}} >
-            FINISHED THE SURVEY, THANKS!
-        </h1>)
+        surveyStatus = (
+            <div className="finished">
+                <img alt="done" src={done} />
+                <h1 style={{border:'1px solid #e1e1e1',backgroundColor:'#fff',padding:'15px 20px',borderRadius:'10px'}} >
+                    FINISHED THE SURVEY, THANKS!
+                </h1>
+            </div>
+        )
     }
 
+
+    
     useEffect(()=>{
-        console.log(questions);
         fetchQuestionsOnLoad();
-    },[questions,fetchQuestionsOnLoad]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
 
     return (
         surveyStatus

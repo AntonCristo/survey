@@ -1,6 +1,6 @@
 import React,{ useState,useRef, useEffect } from 'react';
 import './question.css';
-
+import wrong from '../../../assets/error.svg';
 const Question = props => {
 
     //props.correctAnswerHandler function to play next question needs 
@@ -8,6 +8,7 @@ const Question = props => {
     const [checkedAnswer,setCheckedAnswer] = useState("");
     const [questionPassed,setQuestionPassed] = useState(false);
     const [questionBackground,setQuestionBackground] = useState('transparent');
+    const [wrongAnswerClicked,setWrongAnswerClicked] = useState(null); 
     const aRef = useRef(null);
     const bRef = useRef(null);
     const cRef = useRef(null);
@@ -26,17 +27,15 @@ const Question = props => {
     const checkCorrectAnswer = () => {
         if(checkedAnswer===props.question.correct){
             setQuestionPassed(true);
-            setQuestionBackground('green');
             setTimeout(()=>{props.correctAnswerHandler()},2000);
         }
         else{
             setQuestionPassed(false);
+            setWrongAnswerClicked(<img alt="wrong" src={wrong} />);
             setTimeout(()=>{
-                setQuestionBackground('red');
-            },0);
-            setTimeout(()=>{
-                setQuestionBackground('transparent');
-            },500);
+                setWrongAnswerClicked(null);
+            },1000);
+            
         }
     }
 
@@ -65,10 +64,10 @@ const Question = props => {
 
 
     let element = (
-        <div style={{backgroundColor:questionBackground}}  className="Question_Container">
+        <div style={{border:'8px solid green',borderColor:questionBackground}}  className="Question_Container">
         {   props.question ?
             <React.Fragment>
-                <div>Question : {props.question.question}</div>
+                <div>Question {props.index+1} : {props.question.question}</div>
                 <div>
                     <label onClick={getCheckedAnswer}>
                         <input ref={aRef} type="radio" value="a" name="answers" />
@@ -88,6 +87,7 @@ const Question = props => {
                     </label>
                 </div>
                 <div>
+                    {wrongAnswerClicked}
                     <button onClick={checkCorrectAnswer} >Check Correct Answer</button>
                     {correctAnimationText}
                 </div>

@@ -13,9 +13,15 @@ function App() {
 
   return (
     <div className="App">
-      <h1>The Big Animal Survey, Help Me Solve The Mystery</h1>
+      <div>
+        <h1>The Big Animal Survey, Help Me Solve The Mystery</h1>
+      </div>
+      
       { showSurvey ? null : <StartButton clicked={onShowSurveyClickedHandler}>START SURVEY</StartButton>}
       { showSurvey ? <Survey/> : null}
+      
+      
+      
     </div>
   );
 }

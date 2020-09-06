@@ -1,11 +1,15 @@
 import React from 'react';
 import './startbutton.css';
+import start from '../../assets/start.svg';
 
 const startButton = props => {
     return (
-        <button onClick={props.clicked} className="StartButton">
-            {props.children}
-        </button>
+        <div onClick={props.clicked} className="Button_container">
+            <img alt="start" src={start} />
+            <div className="StartButton">
+                {props.children}
+            </div>
+        </div>
     );
 }
 
